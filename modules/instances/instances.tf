@@ -1,6 +1,6 @@
 resource "google_compute_instance" "jenkins-node-master" {
   name         = "jenkins-node-master"
-  machine_type = "f1-micro"
+  machine_type = var.machine_types
   zone         = var.zone
   
   allow_stopping_for_update = true

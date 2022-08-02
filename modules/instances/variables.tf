@@ -16,6 +16,9 @@ variable "disk_size" {
 
 variable "disk_type" {
   default = "pd-standard"
+  # default = "pd-balanced"
+  # default = "pd-ssd"
+  # default = "pd-extreme"
 }
 
 variable "preemptible_state" {

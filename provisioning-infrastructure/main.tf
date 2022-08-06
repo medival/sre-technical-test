@@ -16,7 +16,10 @@ provider "google" {
 
 module "instances" {
   source     = "./modules/instances"
+}
 
+module "network" {
+  source     = "./modules/network"
 }
 
 # Jenkins Master Output

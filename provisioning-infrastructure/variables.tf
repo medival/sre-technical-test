@@ -7,5 +7,5 @@ variable "zone" {
 }
 
 variable "project_id" {
- default = "c22-ps072"
+ default = "submission-adi-purnomo"
 }

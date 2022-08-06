@@ -2,6 +2,10 @@ variable "zone" {
   default = "asia-southeast2-a"
 }
 
+variable "env" {
+  default = "dev"
+}
+
 variable "operating_system" {
   default = "ubuntu-os-cloud/ubuntu-1804-lts"
 }

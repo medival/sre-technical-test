@@ -1,4 +1,4 @@
-sudo useradd medival -s /bin/bash -aG sudo
+sudo useradd -m medival -s /bin/bash -G sudo
 sudo apt-get update
 # sudo apt-get dist-upgrade -y
 sudo apt install software-properties-common

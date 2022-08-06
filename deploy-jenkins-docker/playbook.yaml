@@ -23,7 +23,6 @@
       service:
         name: jenkins
         state: started
----
 - hosts: all
   tasks:
     - name: Install aptitude

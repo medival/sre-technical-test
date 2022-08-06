@@ -1,0 +1,6 @@
+[jenkins-master]
+jenkins-node-master-dev
+
+[jenkins-worker]
+jenkins-node-1-dev
+jenkins-node-2-dev

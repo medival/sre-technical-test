@@ -1,0 +1,25 @@
+---
+- hosts: [jenkins-master]
+  # become: true
+  # remote_user: ubuntu
+  # become_user: root
+  tasks:
+    - name: Ensure the jenkins apt repository key is installed
+      apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+        state: present
+
+    - name: Ensure the repository is configured
+      apt_repository:
+        repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+        state: present
+
+    - name: Ensure jenkins is installed
+      apt:
+        name: jenkins
+        update_cache: yes
+
+    - name: Ensure jenkins is running
+      service:
+        name: jenkins
+        state: started

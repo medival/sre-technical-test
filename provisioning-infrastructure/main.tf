@@ -40,6 +40,6 @@ output "jenkins-node-2-external-ip" {
   value = module.instances.jenkins-node-2-external-ip
 }
 
-output "jenkins-node-2-external-ip" {
-  value = module.instances.jenkins-node-2-external-ip
+output "jenkins-node-2-internal-ip" {
+  value = module.instances.jenkins-node-2-internal-ip
 }

@@ -47,6 +47,7 @@
       shell: cat /var/lib/jenkins/secrets/initialAdminPassword
       changed_when: false
       register: result
+      ignore_errors: true
 
     - name: Password to "Unlock Jenkins"
       debug:
@@ -99,3 +100,27 @@
         name: medival
         group: docker
         append: yes
+
+- hosts: all
+  tasks:
+    - name: add apt list
+      command: echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+
+    - name: Add gcloud gpg apt Key
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+    - name: Add gcloud repository
+      apt_repository:
+        repo: deb https://packages.cloud.google.com/apt cloud-sdk main
+        state: present
+
+    - name: Update package
+      command: apt update
+
+    - name: Update apt and install gcloud-cli
+      apt:
+        name: google-cloud-cli
+        state: latest
+        update_cache: true

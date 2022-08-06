@@ -3,7 +3,7 @@ resource "google_compute_instance" "jenkins-node-master" {
   machine_type = var.machine_types
   zone         = var.zone
   tags         = ["ssh","http","https","allow-8080"]
-  hostname     = "jenkins-node-master.${var.env}"
+  hostname     = "jenkins-node-master"
   allow_stopping_for_update = true
 
   boot_disk {
@@ -37,7 +37,7 @@ resource "google_compute_instance" "jenkins-node-1" {
   machine_type = var.machine_types
   zone         = var.zone
   tags         = ["ssh","http","https"]
-  hostname     = "jenkins-node-1.${var.env}"
+  hostname     = "jenkins-node-1"
 
   allow_stopping_for_update = true
 
@@ -73,7 +73,7 @@ resource "google_compute_instance" "jenkins-node-2" {
   machine_type = var.machine_types
   zone         = var.zone
   tags         = ["ssh","http","https"]
-  hostname     = "jenkins-node-2.${var.env}"
+  hostname     = "jenkins-node-2"
 
   allow_stopping_for_update = true
 

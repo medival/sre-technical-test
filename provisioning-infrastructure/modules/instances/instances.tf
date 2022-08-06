@@ -23,7 +23,7 @@ resource "google_compute_instance" "jenkins-node-master" {
     ssh-keys = "${var.gce_ssh_user}:${file(var.gce_ssh_pub_key)}"
   }
 
-  metadata_startup_script = file(var.startup_script_custom)
+  metadata_startup_script = file(var.startup_script)
 
   network_interface {
     network       = "default"
@@ -36,7 +36,7 @@ resource "google_compute_instance" "jenkins-node-1" {
   name         = "jenkins-node-1"
   machine_type = var.machine_types
   zone         = var.zone
-  tags         = ["ssh","http","https","allow-8080"]
+  tags         = ["ssh","http","https"]
   hostname     = "jenkins-node-1-${var.env}"
 
   allow_stopping_for_update = true
@@ -72,7 +72,7 @@ resource "google_compute_instance" "jenkins-node-2" {
   name         = "jenkins-node-2"
   machine_type = var.machine_types
   zone         = var.zone
-  tags         = ["ssh","http","https","allow-8080"]
+  tags         = ["ssh","http","https"]
   hostname     = "jenkins-node-2-${var.env}"
 
   allow_stopping_for_update = true

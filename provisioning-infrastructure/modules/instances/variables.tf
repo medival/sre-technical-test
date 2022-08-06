@@ -49,6 +49,10 @@ variable "startup_script_node" {
   default = "modules/instances/install_docker.sh"
 }
 
+variable "startup_script" {
+  default = "modules/instances/startup_scripts.sh"
+}
+
 variable "gce_ssh_user" {
   default = "medival"
 }

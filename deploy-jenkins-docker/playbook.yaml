@@ -1,4 +1,14 @@
 ---
+- hosts: all
+  tasks:
+    - name: Update package
+      command: apt update
+
+    - name: Install Java
+      apt:
+        name: openjdk-8-jdk
+        state: present
+
 - hosts: [jenkins-master]
   # become: true
   # remote_user: ubuntu
@@ -9,14 +19,6 @@
       register: hname
 
     - debug: msg="{{ hname.stdout }}"
-
-    - name: Update package
-      command: apt update
-
-    - name: Install Java
-      apt:
-        name: openjdk-8-jdk
-        state: present
 
     - name: Install key for the jenkins apt repository
       apt_key:

@@ -1,5 +1,5 @@
 variable "zone" {
-  default = "us-central1-a"
+  default = "asia-southeast2"
 }
 
 variable "operating_system" {

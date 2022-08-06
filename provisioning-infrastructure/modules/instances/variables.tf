@@ -50,7 +50,7 @@ variable "startup_script_node" {
 }
 
 variable "startup_script" {
-  default = "modules/instances/startup_scripts.sh"
+  default = "modules/instances/startup_script.sh"
 }
 
 variable "gce_ssh_user" {

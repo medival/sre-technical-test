@@ -4,25 +4,52 @@
   # remote_user: ubuntu
   # become_user: root
   tasks:
-    - name: Ensure the jenkins apt repository key is installed
+    - name: Check hostname
+      command: hostname
+      register: hname
+
+    - debug: msg="{{ hname.stdout }}"
+
+    - name: Update package
+      command: apt update
+
+    - name: Install Java
+      apt:
+        name: openjdk-8-jdk
+        state: present
+
+    - name: Install key for the jenkins apt repository
       apt_key:
-        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+        url: "https://pkg.jenkins.io/debian/jenkins-ci.org.key"
         state: present
 
-    - name: Ensure the repository is configured
+    - name: Install access to the jenkins apt repository
       apt_repository:
-        repo: "deb https://pkg.jenkins.io/debian-stable binary/"
+        repo: deb http://pkg.jenkins.io/debian-stable binary/
         state: present
+        filename: "jenkins-stable"
 
-    - name: Ensure jenkins is installed
+    - name: Apt update for the jenkins repository
+      command: apt update
+
+    - name: Install jenkins package
       apt:
         name: jenkins
-        update_cache: yes
+        # state: installed
 
-    - name: Ensure jenkins is running
-      service:
-        name: jenkins
-        state: started
+    - name: Wait for jenkins to start up
+      wait_for:
+        timeout: 35
+
+    - name: Get jenkins password
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+      changed_when: false
+      register: result
+
+    - name: Password to "Unlock Jenkins"
+      debug:
+        var: result.stdout
+
 - hosts: all
   tasks:
     - name: Install aptitude
@@ -60,6 +87,13 @@
         state: latest
         update_cache: true
 
-    - name: Install Docker Module for Python
-      pip:
+    - name: Create "docker" group
+      group:
         name: docker
+        state: present
+
+    - name: Add remote "medival" user to "docker" group
+      user:
+        name: medival
+        group: docker
+        append: yes
